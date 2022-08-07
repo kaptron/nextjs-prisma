@@ -1,9 +1,10 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
-import { createTodo, deleteTodo, toggleTodo, useTodos } from '../api'
-import styles from '../styles/Home.module.css'
-import { Todo } from '../types'
+
+import { AddTodoInput } from 'components/AddTodoInput'
+import { deleteTodo, toggleTodo, useTodos } from 'src/api'
+import { Todo } from 'src/types'
+import styles from 'styles/Home.module.css'
 
 export const TodoList: React.FC = () => {
   const { data: todos, error } = useTodos()
@@ -41,29 +42,6 @@ const TodoItem: React.FC<{ todo: Todo }> = ({ todo }) => (
     </button>
   </li>
 )
-
-const AddTodoInput = () => {
-  const [text, setText] = useState('')
-
-  return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault()
-        createTodo(text)
-        setText('')
-      }}
-      className={styles.addTodo}
-    >
-      <input
-        className={styles.input}
-        placeholder='Buy some milk'
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button className={styles.addButton}>Add</button>
-    </form>
-  )
-}
 
 const Home: NextPage = () => {
   return (

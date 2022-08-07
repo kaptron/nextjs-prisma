@@ -19,8 +19,28 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    'react/react-in-jsx-scope': 0,
-    'react/prop-types': 0,
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    // import/order formats and groups the imports at the top of every file
+    'import/order': [
+      'error',
+      {
+        alphabetize: { order: 'asc', caseInsensitive: true },
+        'newlines-between': 'always-and-inside-groups',
+        groups: [['builtin', 'external'], 'internal', ['sibling', 'parent']],
+        pathGroupsExcludedImportTypes: ['src/**', 'test/**'],
+        pathGroups: [
+          {
+            pattern: 'src/**',
+            group: 'internal',
+          },
+          {
+            pattern: 'test/**',
+            group: 'internal',
+          },
+        ],
+      },
+    ],
   },
   settings: {
     'import/resolver': {
